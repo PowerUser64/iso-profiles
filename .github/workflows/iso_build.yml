@@ -48,7 +48,7 @@ jobs:
           iso-profiles-repo: "https://github.com/PowerUser64/iso-profiles"
           # version: "21.0"
           kernel: linux515
-          code-name: "Ornara"
+          # code-name: "Ornara"
           # providing a release-tag allows for github releases
           release-tag: ${{ needs.prepare-release.outputs.release_tag }}
       # delete the github release in case of cancellation or failure
