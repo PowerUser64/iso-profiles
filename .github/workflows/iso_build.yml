@@ -13,27 +13,35 @@ jobs:
   prepare-release:
     runs-on: ubuntu-20.04
     steps:
-      # cancel already running instances of the same action on the currently working on branch
-      - uses: styfle/cancel-workflow-action@0.9.0
+    steps:
+      - uses: styfle/cancel-workflow-action@0.9.1
         with:
           access_token: ${{ github.token }}
       - id: time
         uses: nanzm/get-time-action@v1.1
         with:
           format: 'YYYYMMDDHHmm'
+      - id: receive
+        uses: boredland/kernel-info@main
     outputs:
-      # generate a common tag to be used in all elements of the matrix strategy
       release_tag: ${{ steps.time.outputs.time }}
-  release:
+      longterm: ${{ steps.receive.outputs.longterm-pkg }}
+      stable: ${{ steps.receive.outputs.stable-pkg }}
+  build-release:
     runs-on: ubuntu-20.04
     needs: prepare-release
     strategy:
       matrix:
         ##### EDIT ME #####
-        EDITION: [gnome]
-        BRANCH: [stable]
-        SCOPE: [minimal]
         ###################
+        kernel:
+          - ${{ needs.prepare-release.outputs.longterm }}
+        include:
+          - edition: gnome
+            branch: stable
+            scope: minimal
+            kernel: ${{ needs.prepare-release.outputs.stable }}
+            experimental: true
     steps:
       # cancel already running instances of the same action on the currently working on branch
       - uses: styfle/cancel-workflow-action@0.9.0
@@ -42,14 +50,11 @@ jobs:
       - id: image-build
         uses: manjaro/manjaro-iso-action@main
         with:
+          iso-profiles-repo: "https://github.com/PowerUser64/iso-profiles"
           edition: ${{ matrix.edition }}
           branch: ${{ matrix.branch }}
           scope: ${{ matrix.scope }}
-          iso-profiles-repo: "https://github.com/PowerUser64/iso-profiles"
-          # version: "21.0"
-          kernel: linux515
-          # code-name: "Ornara"
-          # providing a release-tag allows for github releases
+          kernel: ${{ matrix.kernel }}
           release-tag: ${{ needs.prepare-release.outputs.release_tag }}
       # delete the github release in case of cancellation or failure
       # refer to .github/workflows/cleanup-test-release.yml for rollback strategies concerning the other distribution channels
