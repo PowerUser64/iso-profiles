@@ -33,10 +33,9 @@ jobs:
     needs: prepare-release
     strategy:
       matrix:
-        - EDITION: gnome
-        - BRANCH: stable
-        - SCOPE: minimal
-        - KERNEL: ${{ needs.prepare-release.outputs.longterm }}
+        - edition: [gnome]
+        - branch: [stable]
+        - scope: [minimal]
     steps:
       # cancel already running instances of the same action on the currently working on branch
       - uses: styfle/cancel-workflow-action@0.9.0
@@ -49,7 +48,7 @@ jobs:
           edition: ${{ matrix.edition }}
           branch: ${{ matrix.branch }}
           scope: ${{ matrix.scope }}
-          kernel: ${{ matrix.kernel }}
+          kernel: ${{ needs.prepare-release.outputs.longterm }}
           release-tag: ${{ needs.prepare-release.outputs.release_tag }}
       # delete the github release in case of cancellation or failure
       # refer to .github/workflows/cleanup-test-release.yml for rollback strategies concerning the other distribution channels
