@@ -1,43 +1,40 @@
-## My packages (that don't really fit in categories)
-pavucontrol
-neovim
-
 ## Network
 networkmanager
+>extra networkmanager-openconnect
+>extra networkmanager-openvpn
+>extra networkmanager-pptp
+>extra network-manager-sstp
+>extra networkmanager-strongswan
+>extra networkmanager-vpnc
 ntp
 >extra modemmanager                # optional for networkmanager
 usb_modeswitch                     # Optional for modemmanager
 openresolv                         # optional for networkmanager
-openssh                            # optional for gnome-control-center
+>extra openssh                     # optional for gnome-control-center
 >extra nss-mdns                    # optional for avahi; avahi required by gvfs
 
 ## Btrfs
 grub-btrfs
-timeshift-autosnap-manjaro
+>extra timeshift-autosnap-manjaro
 btrfsmaintenance
 
 ## Libraries for Sound/Audio/Video
-manjaro-alsa
-manjaro-gstreamer
+>extra manjaro-alsa
+>extra manjaro-gstreamer
 #>extra manjaro-modem              # ?
-#>extra manjaro-pulse
-manjaro-pipewire
-pipewire-v4l2
-pipewire-jack
-realtime-privileges
-libdvdcss
+>extra manjaro-pulse
+>extra libdvdcss
 
 ## Fonts
 ttf-dejavu
-#ttf-droid
+ttf-droid
 ttf-hack
 ttf-inconsolata
 ttf-indic-otf
 ttf-liberation
 noto-fonts                         # default font
 >extra noto-fonts-compat
-ttf-joypixels
-noto-fonts-emoji
+>extra noto-fonts-emoji
 #noto-fonts-cjk                    # asian fonts - large package, ~76 mb compressed
 adobe-source-sans-pro-fonts
 adobe-source-han-sans-jp-fonts
@@ -50,27 +47,31 @@ adobe-source-han-sans-cn-fonts
 ## Package management
 pamac-gtk
 pamac-gnome-integration
-pamac-snap-plugin
-pamac-flatpak-plugin
+>extra pamac-snap-plugin
+>extra pamac-flatpak-plugin
 
 ## Printing
 >extra manjaro-printer
 
 ## GNOME group
 gnome-calendar
-baobab
+>extra gnome-contacts
+>extra baobab
+>extra simple-scan
 evince
 gnome-shell
 file-roller
 gedit
+>extra gnome-boxes
 gnome-calculator
-gnome-clocks
+>extra gnome-characters
+>extra gnome-clocks
 #gnome-color-manager               # required by gnome-control-center
 gnome-disk-utility
-gnome-font-viewer
+>extra gnome-font-viewer
 #yelp                              # required by gnome-user-docs
 gnome-logs
->extra gnome-maps
+#>extra gnome-maps
 gnome-system-monitor
 #epiphany                          # Firefox included as default browser
 gnome-screenshot
@@ -103,7 +104,7 @@ tracker3-miners
 >extra vino
 xdg-user-dirs-gtk
 #gnome-books
-eog                             # gthumb included instead
+#eog                               # gthumb included instead
 nautilus
 #orca
 #gnome-music                       # lollypop included instead
@@ -114,12 +115,12 @@ gnome-terminal
 #tracker-miners                    # deprecated
 
 ## GNOME Extra applications
-dconf-editor
-#>extra geary
+>extra dconf-editor
+>extra geary
 gnome-tweaks
 #gnome-usage
 #gnome-sound-recorder
-#>extra gnome-todo
+>extra gnome-todo
 #accerciser
 #gnome-builder
 #gnome-connections
@@ -157,11 +158,11 @@ gnome-tweaks
 #tali
 
 ## GNOME Shell Extensions
-gnome-shell-extension-appindicator
-#>extra gnome-shell-extension-dash-to-dock
+>extra gnome-shell-extension-appindicator
+>extra gnome-shell-extension-dash-to-dock
 >extra gnome-shell-extension-gnome-ui-tune
 >extra gnome-shell-extension-gsconnect
-gnome-shell-extension-x11gestures
+>extra gnome-shell-extension-x11gestures
 
 ## Themes
 adwaita-maia
@@ -174,7 +175,7 @@ gnome-wallpapers
 papirus-maia-icon-theme
 grub-theme-manjaro
 manjaro-artwork
-wallpapers-2018
+>extra wallpapers-2018
 >extra manjaro-wallpapers-18.0
 >extra wallpapers-juhraya
 >extra illyria-wallpaper
@@ -193,12 +194,12 @@ gthumb
 >extra manjaro-log-helper
 firefox
 gnome-layout-switcher
-gtksourceview-pkgbuild      # syntax highlighting for PKGBUILDs
-#fprintd                            # needed for fingerprint reader
-#>extra gnome-firmware
+>extra gtksourceview-pkgbuild      # syntax highlighting for PKGBUILDs
+fprintd                            # needed for fingerprint reader
+>extra gnome-firmware
 gparted
-#>extra seahorse
-#>extra gufw
+>extra seahorse
+>extra gufw
 htop
 ibus
 manjaro-hello
@@ -213,40 +214,38 @@ polkit-gnome
 >extra timeshift
 xdg-utils
 >extra caffeine-ng
-libappindicator-gtk2
-libappindicator-gtk3
-lib32-libappindicator-gtk2
-lib32-libappindicator-gtk3
+>extra libappindicator-gtk3
 lollypop
-fragments
-ffmpegthumbnailer
-gtkhash-nautilus
+>extra fragments
+>extra ffmpegthumbnailer
+>extra cheese
+>extra gtkhash-nautilus
 #manjaro-gnome-vanilla
 #tlp
-power-profiles-daemon       # optional for gnome-control-center
-gnome-appfolders-manager
+>extra power-profiles-daemon       # optional for gnome-control-center
+>extra gnome-appfolders-manager
 >extra gnuchess                    # optional for gnome-chess to play against computer
 chrome-gnome-shell
 >extra deja-dup
 
 ## Optional dependencies for file-roller
-p7zip
-unrar
-unace
-lrzip
-squashfs-tools
+>extra p7zip
+>extra unrar
+>extra unace
+>extra lrzip
+>extra squashfs-tools
 
 ## Optional dependencies for inxi
 dmidecode
 mesa-utils
 
 ## Documentation
-manjaro-documentation-en
+>extra manjaro-documentation-en
 
 ## Settings packages
 manjaro-base-skel
 manjaro-gnome-settings
-manjaro-gnome-assets
+>extra manjaro-gnome-assets
 >extra manjaro-gnome-extension-settings
 >extra lighter-gnome
 #manjaro-browser-settings
