@@ -1,4 +1,5 @@
 ## iso-profiles
+Source: [https://gitlab.manjaro.org/profiles-and-settings/iso-profiles](https://gitlab.manjaro.org/profiles-and-settings/iso-profiles)
 
 
 ### profile.conf
