@@ -44,7 +44,7 @@ jobs:
       - id: image-build
         uses: manjaro/manjaro-iso-action@main
         with:
-          iso-profiles-repo: "https://github.com/PowerUser64/iso-profiles"
+          # iso-profiles-repo: "https://github.com/PowerUser64/iso-profiles"
           edition: ${{ matrix.edition }}
           branch: ${{ matrix.branch }}
           scope: ${{ matrix.scope }}
