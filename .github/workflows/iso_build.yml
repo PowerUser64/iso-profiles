@@ -28,7 +28,7 @@ jobs:
     strategy:
       matrix:
         EDITION: [gnome]
-        BRANCH: [unstable]
+        BRANCH: [stable]
         SCOPE: [full, minimal]
     steps:
       -
