@@ -29,7 +29,7 @@ jobs:
       matrix:
         EDITION: [gnome]
         BRANCH: [stable]
-        SCOPE: [full, minimal]
+        SCOPE: [minimal]
     steps:
       -
         uses: styfle/cancel-workflow-action@0.9.0
