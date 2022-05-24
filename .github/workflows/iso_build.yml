@@ -2,59 +2,56 @@ name: iso_build
 on:
   workflow_dispatch:
   schedule:
-    - cron:  '30 6 * * 4'
-  push:
-    branches:
-      - master
-
-concurrency:
-  group: ${{ github.workflow }}
-  cancel-in-progress: false
+    - cron:  '30 2 * * *'
 
 jobs:
   prepare-release:
     runs-on: ubuntu-20.04
     steps:
-      # - uses: styfle/cancel-workflow-action@0.9.1
-      #   with:
-      #     access_token: ${{ github.token }}
-      - id: time
+      -
+        uses: styfle/cancel-workflow-action@0.9.0
+        with:
+          access_token: ${{ github.token }}
+      -
+        id: time
         uses: nanzm/get-time-action@v1.1
         with:
           format: 'YYYYMMDDHHmm'
-      - id: receive
-        uses: boredland/kernel-info@main
     outputs:
       release_tag: ${{ steps.time.outputs.time }}
-      longterm: ${{ steps.receive.outputs.longterm-pkg }}
-      stable: ${{ steps.receive.outputs.stable-pkg }}
   build-release:
     runs-on: ubuntu-20.04
-    needs: prepare-release
+    needs: [prepare-release]
     strategy:
       matrix:
-        edition: [gnome]
-        branch: [stable]
-        scope: [minimal]
+        EDITION: [gnome]
+        BRANCH: [unstable]
+        SCOPE: [full, minimal]
     steps:
-      # cancel already running instances of the same action on the currently working on branch
-      # - uses: styfle/cancel-workflow-action@0.9.0
-      #   with:
-      #     access_token: ${{ github.token }}
-      - id: image-build
+      -
+        uses: styfle/cancel-workflow-action@0.9.0
+        with:
+          access_token: ${{ github.token }}
+      -
+        id: time
+        uses: nanzm/get-time-action@v1.1
+        with:
+          format: 'YY.MM'
+      -
+        name: image-build-upload
         uses: manjaro/manjaro-iso-action@main
         with:
-          # iso-profiles-repo: "https://github.com/PowerUser64/iso-profiles"
+          iso-profiles-repo: "https://github.com/PowerUser64/iso-profiles"
           edition: ${{ matrix.edition }}
           branch: ${{ matrix.branch }}
           scope: ${{ matrix.scope }}
-          kernel: ${{ needs.prepare-release.outputs.longterm }}
+          version: ${{ steps.time.outputs.time }}-development
+          kernel: linux515
+          code-name: "Nightly-Build"
           release-tag: ${{ needs.prepare-release.outputs.release_tag }}
-      # delete the github release in case of cancellation or failure
-      # refer to .github/workflows/cleanup-test-release.yml for rollback strategies concerning the other distribution channels
-      - name: rollback github release
+      -
+        name: rollback
         if: ${{ failure() || cancelled() }}
         run: |
           echo ${{ github.token }} | gh auth login --with-token
           gh release delete ${{ needs.prepare-release.outputs.release_tag }} -y --repo ${{ github.repository }}
-          git push --delete origin ${{ needs.prepare-release.outputs.release_tag }}
