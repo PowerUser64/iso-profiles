@@ -73,7 +73,7 @@ gnome-logs
 >extra gnome-maps
 gnome-system-monitor
 #epiphany                          # Firefox included as default browser
-gnome-screenshot
+#gnome-screenshot                  # New screenshot tool integrated
 totem
 gnome-weather
 >basic gdm                         # gdm-plymouth in full edition
@@ -164,10 +164,11 @@ gnome-shell-extension-appindicator
 gnome-shell-extension-x11gestures
 
 ## Themes
-adwaita-maia
+#adwaita-maia
+adw-gtk-theme
 firefox-gnome-theme-maia
 manjaro-gdm-branding
-manjaro-gdm-theme
+#manjaro-gdm-theme                 # Needs updating for GNOME 42
 >extra gdm-plymouth
 >extra plymouth-theme-manjaro
 gnome-wallpapers
@@ -178,7 +179,7 @@ wallpapers-2018
 >extra manjaro-wallpapers-18.0
 >extra wallpapers-juhraya
 >extra illyria-wallpaper
-qgnomeplatform
+qgnomeplatform-qt5
 qgnomeplatform-qt6
 gnome-themes-extra
 xcursor-breeze
